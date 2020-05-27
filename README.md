@@ -63,3 +63,5 @@ If you need to add more controllers to the project just create a new file in `/c
 
 - `api/users/register` - Register the User
 - `api/users/login` - Signing in the User
+- `api/users/profile` - Return the User's data
+- `api/users/logout` - Remove the req.user property and clear the login session (if any)
