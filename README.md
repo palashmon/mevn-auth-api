@@ -58,3 +58,8 @@ If you need to add more routes to the project just create a new file in `/routes
 ### Creating new controllers
 
 If you need to add more controllers to the project just create a new file in `/controllers/` and use them in the routes.
+
+## Current Routes
+
+- `api/users/register` - Register the User
+- `api/users/login` - Signing in the User

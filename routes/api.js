@@ -1,6 +1,6 @@
-var express = require("express");
-var usersRouter = require("./users");
+const express = require("express");
+const usersRouter = require("./users");
 
-var app = express();
+const app = express();
 app.use("/users/", usersRouter);
 module.exports = app;
