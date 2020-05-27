@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const { body, validationResult, check } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 const User = require("../models/UserModel");
 const apiResponse = require("../helpers/apiResponse");
 const getAsyncFn = require("../helpers/getAsyncFn");
