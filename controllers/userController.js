@@ -21,7 +21,7 @@ exports.register = async (req, res) => {
       name, username, email, password, confirmPassword,
     } = req.body;
     if (password !== confirmPassword) {
-      return res.status(400).json({ msg: "Password do not match." });
+      return apiResponse.validationError(res, "Password do not match.");
     }
 
     // Check for the unique Username
@@ -81,7 +81,7 @@ exports.login = async (req, res) => {
       const key = process.env.JWT_SECRET;
       const token = await getAsyncFn.sign(payload, key, { expiresIn: "7d" });
       const data = {
-        token: `Bearer ${token}`,
+        token, // Removed the "Bearer" prefix, as nuxt auth module auto adds it for us
         user,
       };
       return apiResponse.successWithData(res, "Hurry! You are now logged in.", data);
@@ -103,12 +103,10 @@ exports.profile = (req, res) => apiResponse.json(res, { user: req.user });
 // eslint-disable-next-line consistent-return
 exports.validateRegister = [
   // Validate fields.
-  body("name").isLength({ min: 1 }).trim().withMessage("Name field is required")
-    .isAlphanumeric()
-    .withMessage("Name has non-alphanumeric characters."),
+  body("name").isLength({ min: 1 }).trim().withMessage("Name field is required"),
   body("username").isLength({ min: 1 }).trim().withMessage("Username field is required")
     .isAlphanumeric()
-    .withMessage("Name has non-alphanumeric characters."),
+    .withMessage("Username has non-alphanumeric characters."),
   body("email").normalizeEmail().isEmail().withMessage("That Email is not valid"),
   body("password", "Password Cannot be Blank!").notEmpty(),
   body("confirmPassword", "Confirmed Password cannot be blank!").notEmpty(),
